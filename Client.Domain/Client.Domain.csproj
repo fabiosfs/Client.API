@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ClientContext\Dtos\" />
     <Folder Include="ClientContext\Handlers\" />
     <Folder Include="ClientContext\Repositories\" />
+    <Folder Include="SharedContext\Enuns\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="prmToolkit.NotificationPattern" Version="1.1.5" />
   </ItemGroup>
 
