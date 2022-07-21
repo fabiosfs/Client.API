@@ -12,14 +12,15 @@ namespace Client.Test.ClientContext
         public static readonly DateTime CreateDate = DateTime.Now;
         public static readonly bool Active = true;
 
-        public static readonly clientContext.Client Client = new clientContext.Client(
-            ClientData.Name,
-            ClientData.BirthDate,
-            ClientData.Cpf,
-            ClientData.Rg,
-            ClientData.Address,
-            ClientData.CreateDate,
-            ClientData.Active
-        );
+        public static readonly clientContext.Client Client = new clientContext.Client()
+        {
+            Name = ClientData.Name,
+            BirthDate = ClientData.BirthDate,
+            Cpf = ClientData.Cpf,
+            Rg = ClientData.Rg,
+            Address = ClientData.Address,
+            CreateDate = ClientData.CreateDate,
+            Active = ClientData.Active
+        };
     }
 }

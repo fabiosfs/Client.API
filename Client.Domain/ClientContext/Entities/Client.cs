@@ -5,24 +5,16 @@ namespace Client.Domain.ClientContext
 {
     public class Client : EntityBase
     {
-        public string Name { get; private set; }
-        public DateTime BirthDate { get; private set; }
-        public string Cpf { get; private set; }
-        public string Rg { get; private set; }
-        public Address Address { get; private set; }
-        public DateTime CreateDate { get; private set; }
-        public bool Active { get; private set; }
+        public string Name { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string Cpf { get; set; }
+        public string Rg { get; set; }
+        public Address Address { get; set; }
+        public DateTime CreateDate { get; set; }
+        public bool Active { get; set; }
 
-        public Client(string name, DateTime birthDate, string cpf, string rg, Address address, DateTime createDate, bool active)
+        public override void Validation()
         {
-            Name = name;
-            BirthDate = birthDate;
-            Cpf = cpf;
-            Rg = rg;
-            Address = address;
-            CreateDate = createDate;
-            Active = active;
-
             new AddNotifications<Client>(this)
                 .IfNullOrInvalidLength(client => client.Name, 1, 255, "O nome do cliente deve conter de 1 a 255 caracteres.")
                 .IfFalse(BirthDate > new DateTime(1753, 1, 1), "", "A data de nascimento do cliente deve ser maior que 01/01/1753.")
@@ -33,7 +25,10 @@ namespace Client.Domain.ClientContext
             if (Address == null)
                 AddNotification("", "É obrigatório informar um endereço para o cliente.");
             else
+            {
+                Address.Validation();
                 AddNotifications(Address);
+            }
         }
     }
 }

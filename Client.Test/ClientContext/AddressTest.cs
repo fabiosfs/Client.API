@@ -9,6 +9,7 @@ namespace Client.Test.ClientContext
         public void RetornSucesso()
         {
             var client = AddressData.Address;
+            client.Validation();
 
             Assert.True(client.IsValid());
         }
@@ -18,15 +19,17 @@ namespace Client.Test.ClientContext
         [InlineData("FabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioF")]
         public void RetornErrorAddressStreet(string street)
         {
-            var address = new clientContext.Address(
-                street,
-                AddressData.ZipCode,
-                AddressData.Number,
-                AddressData.Complement,
-                AddressData.Region,
-                AddressData.City,
-                AddressData.State
-            );
+            var address = new clientContext.Address()
+            {
+                Street = street,
+                ZipCode = AddressData.ZipCode,
+                Number = AddressData.Number,
+                Complement = AddressData.Complement,
+                Region = AddressData.Region,
+                City = AddressData.City,
+                State = AddressData.State
+            };
+            address.Validation();
 
             Assert.True(address.IsInvalid());
         }
@@ -36,15 +39,17 @@ namespace Client.Test.ClientContext
         [InlineData("123456789")]
         public void RetornErrorAddressZipCode(string zipCode)
         {
-            var address = new clientContext.Address(
-                AddressData.Street,
-                zipCode,
-                AddressData.Number,
-                AddressData.Complement,
-                AddressData.Region,
-                AddressData.City,
-                AddressData.State
-            );
+            var address = new clientContext.Address()
+            {
+                Street = AddressData.Street,
+                ZipCode = zipCode,
+                Number = AddressData.Number,
+                Complement = AddressData.Complement,
+                Region = AddressData.Region,
+                City = AddressData.City,
+                State = AddressData.State
+            };
+            address.Validation();
 
             Assert.True(address.IsInvalid());
         }
@@ -57,15 +62,17 @@ namespace Client.Test.ClientContext
             if (int.MaxValue == number)
                 number += 1;
 
-            var address = new clientContext.Address(
-                AddressData.Street,
-                AddressData.ZipCode,
-                number,
-                AddressData.Complement,
-                AddressData.Region,
-                AddressData.City,
-                AddressData.State
-            );
+            var address = new clientContext.Address()
+            {
+                Street = AddressData.Street,
+                ZipCode = AddressData.ZipCode,
+                Number = number,
+                Complement = AddressData.Complement,
+                Region = AddressData.Region,
+                City = AddressData.City,
+                State = AddressData.State
+            };
+            address.Validation();
 
             Assert.True(address.IsInvalid());
         }
@@ -74,15 +81,17 @@ namespace Client.Test.ClientContext
         [InlineData("FabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioF")]
         public void RetornErrorAddressComplement(string complement)
         {
-            var address = new clientContext.Address(
-                AddressData.Street,
-                AddressData.ZipCode,
-                AddressData.Number,
-                complement,
-                AddressData.Region,
-                AddressData.City,
-                AddressData.State
-            );
+            var address = new clientContext.Address()
+            {
+                Street = AddressData.Street,
+                ZipCode = AddressData.ZipCode,
+                Number = AddressData.Number,
+                Complement = complement,
+                Region = AddressData.Region,
+                City = AddressData.City,
+                State = AddressData.State
+            };
+            address.Validation();
 
             Assert.True(address.IsInvalid());
         }
@@ -92,15 +101,17 @@ namespace Client.Test.ClientContext
         [InlineData("FabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioF")]
         public void RetornErrorAddressRegion(string region)
         {
-            var address = new clientContext.Address(
-                AddressData.Street,
-                AddressData.ZipCode,
-                AddressData.Number,
-                AddressData.Complement,
-                region,
-                AddressData.City,
-                AddressData.State
-            );
+            var address = new clientContext.Address()
+            {
+                Street = AddressData.Street,
+                ZipCode = AddressData.ZipCode,
+                Number = AddressData.Number,
+                Complement = AddressData.Complement,
+                Region = region,
+                City = AddressData.City,
+                State = AddressData.State
+            };
+            address.Validation();
 
             Assert.True(address.IsInvalid());
         }
@@ -110,15 +121,17 @@ namespace Client.Test.ClientContext
         [InlineData("FabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioFabioF")]
         public void RetornErrorAddressCity(string city)
         {
-            var address = new clientContext.Address(
-                AddressData.Street,
-                AddressData.ZipCode,
-                AddressData.Number,
-                AddressData.Complement,
-                AddressData.Region,
-                city,
-                AddressData.State
-            );
+            var address = new clientContext.Address()
+            {
+                Street = AddressData.Street,
+                ZipCode = AddressData.ZipCode,
+                Number = AddressData.Number,
+                Complement = AddressData.Complement,
+                Region = AddressData.Region,
+                City = city,
+                State = AddressData.State
+            };
+            address.Validation();
 
             Assert.True(address.IsInvalid());
         }
@@ -129,15 +142,17 @@ namespace Client.Test.ClientContext
         [InlineData(27)]
         public void RetornErrorAddressState(int state)
         {
-            var address = new clientContext.Address(
-                AddressData.Street,
-                AddressData.ZipCode,
-                AddressData.Number,
-                AddressData.Complement,
-                AddressData.Region,
-                AddressData.City,
-                (clientContext.EnState)state
-            );
+            var address = new clientContext.Address()
+            {
+                Street = AddressData.Street,
+                ZipCode = AddressData.ZipCode,
+                Number = AddressData.Number,
+                Complement = AddressData.Complement,
+                Region = AddressData.Region,
+                City = AddressData.City,
+                State = (clientContext.EnState)state
+            };
+            address.Validation();
 
             Assert.True(address.IsInvalid());
         }

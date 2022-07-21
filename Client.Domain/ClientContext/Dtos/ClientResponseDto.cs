@@ -1,7 +1,8 @@
 ﻿namespace Client.Domain.ClientContext
 {
-    public class ClientBaseDto
+    public class ClientResponseDto
     {
+        public Guid Id { get; set; }
         public string Nome { get; set; }
         public DateTime DataNascimento { get; set; }
         public string Cpf { get; set; }

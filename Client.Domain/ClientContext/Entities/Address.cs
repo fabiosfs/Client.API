@@ -5,26 +5,18 @@ namespace Client.Domain.ClientContext
 {
     public class Address : EntityBase
     {
-        public string Street { get; private set; }
-        public string ZipCode { get; private set; }
-        public int Number { get; private set; }
-        public string Complement { get; private set; }
-        public string Region { get; private set; }
-        public string City { get; private set; }
-        public EnState State { get; private set; }
-        public Guid ClientId { get; private set; }
-        public Client Client { get; private set; }
+        public string Street { get; set; }
+        public string ZipCode { get; set; }
+        public int Number { get; set; }
+        public string Complement { get; set; }
+        public string Region { get; set; }
+        public string City { get; set; }
+        public EnState State { get; set; }
+        public Guid ClientId { get; set; }
+        public Client Client { get; set; }
 
-        public Address(string street, string zipCode, int number, string complement, string region, string city, EnState state)
+        public override void Validation()
         {
-            Street = street;
-            ZipCode = zipCode;
-            Number = number;
-            Complement = complement;
-            Region = region;
-            City = city;
-            State = state;
-
             new AddNotifications<Address>(this)
                 .IfNullOrInvalidLength(address => address.Street, 1, 150, "A rua deve conter de 1 a 150 caracteres.")
                 .IfNullOrInvalidLength(address => address.ZipCode, 8, 8, "O CEP deve conter 8 caracteres.")

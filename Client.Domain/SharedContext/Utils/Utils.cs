@@ -27,6 +27,8 @@ namespace Client.Domain.SharedContext
 
         public void ValidationEntity<T>(T entityClass) where T : EntityBase
         {
+            entityClass.Validation();
+
             if (entityClass.IsInvalid())
                 throw new UnprocessableEntityException(entityClass.Notifications.Select(x => x.Message), "Ocorreram erros de validação.");
         }

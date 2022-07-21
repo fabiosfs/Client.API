@@ -5,9 +5,11 @@ namespace Client.Domain.ClientContext
 {
     public class UpdateClientCommand : IRequest<ReturnBase>
     {
+        public Guid Id { get; }
         public ClientDto ClientDto { get; }
-        public UpdateClientCommand(ClientDto clientDto)
+        public UpdateClientCommand(Guid id, ClientDto clientDto)
         {
+            Id = id;
             ClientDto = clientDto;
         }
     }

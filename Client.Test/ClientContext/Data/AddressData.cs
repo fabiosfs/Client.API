@@ -12,14 +12,15 @@ namespace Client.Test.ClientContext
         public static readonly string City = "Belo Horizonte";
         public static readonly clientContext.EnState State = clientContext.EnState.MG;
 
-        public static readonly clientContext.Address Address = new clientContext.Address(
-            AddressData.Street,
-            AddressData.ZipCode,
-            AddressData.Number,
-            AddressData.Complement,
-            AddressData.Region,
-            AddressData.City,
-            AddressData.State
-        );
+        public static readonly clientContext.Address Address = new clientContext.Address()
+        {
+            Street = AddressData.Street,
+            ZipCode = AddressData.ZipCode,
+            Number = AddressData.Number,
+            Complement = AddressData.Complement,
+            Region = AddressData.Region,
+            City = AddressData.City,
+            State = AddressData.State
+        };
     }
 }

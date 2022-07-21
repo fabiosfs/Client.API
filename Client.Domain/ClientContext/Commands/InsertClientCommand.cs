@@ -5,7 +5,7 @@ namespace Client.Domain.ClientContext
 {
     public class InsertClientCommand : IRequest<ReturnBase>
     {
-        public ClientBaseDto ClientDto { get; }
-        public InsertClientCommand(ClientBaseDto clientDto) => ClientDto = clientDto;
+        public ClientDto ClientDto { get; }
+        public InsertClientCommand(ClientDto clientDto) => ClientDto = clientDto;
     }
 }

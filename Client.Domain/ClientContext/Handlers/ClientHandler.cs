@@ -27,7 +27,7 @@ namespace Client.Domain.ClientContext
             return await _util.TryCatch(async () =>
             {
                 var clients = await _repository.GetAllAsync();
-                var returned = _mapp.Map<IEnumerable<ClientDto>>(clients);
+                var returned = _mapp.Map<IEnumerable<ClientResponseDto>>(clients);
 
                 return new ReturnBase(HttpStatusCode.OK, returned);
             });
@@ -38,7 +38,7 @@ namespace Client.Domain.ClientContext
             return await _util.TryCatch(async () =>
             {
                 var client = await _repository.GetByIdAsync(request.Id);
-                var returned = _mapp.Map<ClientDto>(client);
+                var returned = _mapp.Map<ClientResponseDto>(client);
 
                 return new ReturnBase(HttpStatusCode.OK, returned);
             });
@@ -61,11 +61,12 @@ namespace Client.Domain.ClientContext
         {
             return await _util.TryCatch(async () =>
             {
-                var returnClient = await _repository.GetByIdAsync(request.ClientDto.Id);
+                var returnClient = await _repository.GetByIdAsync(request.Id);
                 if (returnClient == null)
-                    throw new DataNotFoundException($"Nenhum cliente encontrado para o Id: {request.ClientDto.Id}");
+                    throw new DataNotFoundException($"Nenhum cliente encontrado para o Id: {request.Id}");
                 
                 var client = _mapp.Map<Client>(request.ClientDto);
+                client.ChangeId(request.Id);
                 _util.ValidationEntity(client); 
                 var clients = await _repository.UpdateAsync(client);
                 var returned = _mapp.Map<ClientDto>(clients);
