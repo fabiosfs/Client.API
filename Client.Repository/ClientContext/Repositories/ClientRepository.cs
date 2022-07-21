@@ -26,11 +26,31 @@ namespace Client.Repository.ClientContext
                 Address = address,
                 Active = true
             };
+
         }
 
         public async Task<IEnumerable<clientContext.Client>> GetAllAsync()
         {
-            return await Task.Run(() => new List<clientContext.Client>() { _client, _client });
+            var address = new clientContext.Address()
+            {
+                Street = "",
+                ZipCode = null,
+                Number = 123,
+                Complement = "",
+                Region = "",
+                City = "",
+                State = clientContext.EnState.MG
+            };
+            var client = new clientContext.Client()
+            {
+                Name = "Fabio",
+                BirthDate = DateTime.Now,
+                Cpf = null,
+                Rg = "MG12345",
+                Address = address,
+                Active = true
+            };
+            return await Task.Run(() => new List<clientContext.Client>() { _client, client });
         }
 
         public async Task<clientContext.Client> GetByIdAsync(Guid id)

@@ -4,6 +4,9 @@ using MediatR;
 using AutoMapper;
 using Client.Repository.ClientContext;
 using Client.Domain.SharedContext;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.ResponseCompression;
+using System.IO.Compression;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +35,20 @@ builder.Services.AddSingleton(new Util());
 
 // Injeção de dependência do repositório
 builder.Services.AddTransient<IClientRepository, ClientRepository>();
+
+// configuração para compactação de json de retorno
+builder.Services.AddResponseCompression(options =>
+{
+    options.Providers.Add<BrotliCompressionProvider>();
+    options.Providers.Add<GzipCompressionProvider>();
+    options.EnableForHttps = true;
+
+});
+builder.Services.Configure<BrotliCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal);
+builder.Services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal);
+
+// Configuração para remover atributos nulos do retorno
+builder.Services.AddMvc().AddJsonOptions(options => options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull);
 
 var app = builder.Build();
 
